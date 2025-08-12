@@ -1,0 +1,755 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Rubik';
+  }
+  
+  body {
+    display: flex;
+    height: 100vh;
+    background-color: #f5f5fa;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   background: linear-gradient(90deg, #f35c16, #fa840d 78.97%);
+    padding: 1.5vh 2vw;
+    color: white;
+    font-size: 1.7vw;
+    z-index: 1;
+  }
+  
+  .header-title {
+    margin-left: 18vw; /* Align with sidebar width */
+  }
+  
+  .help-icon {
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #ffe2c6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff7516;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.3vw;
+  
+  }
+  
+  
+  .sidebar {
+    width: 18vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2vh 1vw;
+    z-index: 2;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 4vw;
+    border-bottom-right-radius: 4vw;
+  }
+  
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4vh;
+  }
+  .logo-container img{
+    height:7vw;
+    width:7.5vw;
+    margin-bottom:2vh;
+  }
+  
+  .logo {
+    width: 3vw;
+    margin-right: 0.5vw;
+  }
+  
+  .logo-text {
+    font-size: 1.8vw;
+    /* font-weight: bold; */
+  }
+  
+  .logo-text span {
+    color: #4caf50;
+  }
+  
+  .my-view {
+    background: linear-gradient(90deg, #f35c16, #fa840d 78.97%);
+    color: white;
+    padding: 0.7vh 1vw;
+    border-radius: 5vh;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 2vh;
+    font-size: 1vw;
+    cursor: pointer;
+    position: relative; /* Add position relative */
+    max-width: 12vw; /* Add maximum width */
+   
+}
+
+.my-view svg {
+    margin-right: 0.5vw;
+    width: 1.2vw;
+    height: 1.2vw;
+}
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 1.5vh 1vw;
+    margin-bottom: 1vh;
+    border-radius: 2vw;
+    font-size: 1.2vw;
+    cursor: pointer;
+    position: relative;
+    font-weight:200;
+  }
+  
+  .menu-item.active {
+    background: linear-gradient(90deg, #f35c16, #fa840d 78.97%);
+    color: white;
+    width: 113%;
+    border-radius: 5vh;
+    padding: 1.5vh 1vw;
+    justify-content: flex-start;
+    margin-left: -1vw;
+   
+}
+.menu-item.active img {
+    filter: brightness(0) invert(1);
+}
+  .menu-item img {
+    margin-right: 1vw;
+    width: 2vw;
+    height:1.5vw;
+    text-align: center;
+  }
+  
+  
+  
+  
+  .logout {
+   background: linear-gradient(90deg, #f35c16, #fa840d 78.97%);
+    color: white;
+    padding: 0.4vw;
+    border-radius: 5vh;
+    text-align: center;
+    font-size: 1.1vw;
+    cursor: pointer;
+    margin-top: 2vw;
+    width:10vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+  }
+  .logout p{
+    font-size: 1.1vw;
+    margin-top: 0.1vw;
+  }
+  .logout img{
+    margin-right: 0.5vw;
+    width:1.5vw;
+    height:1.5vw;
+    margin-top: 0.1vw;
+  }
+
+  .main-content {
+    display:flex;
+    flex-direction: column;
+    width:82vw;
+    padding: 6vh 2vw 2vh 3vw; /* Added top padding to account for header */
+    margin-left: 0; /* Reset margin */
+    gap:3vh;
+    /* overflow-y:auto; */
+  }
+ .att-header{
+    position: absolute;
+    top: 3.5vw;
+    left: 0;
+    width: 88vw;
+    display: flex;
+    /* gap: 10vw;    */
+    justify-content: space-evenly;
+    align-items: center;
+    background: white; /* Orange header background */
+    padding: 1.5vh 2vw;
+    font-size: 1.7vw;
+    z-index: 1;
+    height: 7vh;
+    margin-left: 12vw;
+}
+.toggle-btn {
+    font-size: 1.1vw;
+    padding: 1vh 2vw;
+    cursor: pointer;
+    border: none;
+    border-radius: 10vw;
+    background: #e6e6e6;
+    color: black;
+    transition: background 0.3s ease, transform 0.2s;
+     
+}
+.section {
+    display: none;
+}
+
+/* Show active section */   
+.section.active {
+    display: block;
+}
+
+.toggle-btn.active {
+    background: linear-gradient(90deg, #f35c16, #fa840d 78.97%);
+    color: white;
+    font-size: 1.1vw;
+}
+
+
+
+/* Attendance Table CSS with simplified fixed layout using only viewport units */
+.attendance-container {
+    width: 77vw;
+    font-family: 'Rubik', sans-serif;
+    padding: 1vh 1vw;
+    background: white;
+    border-radius: 0.5vw;
+    box-shadow: 0 0.1vh 0.2vh rgba(0, 0, 0, 0.1);
+    /* margin: 0 auto; */
+    margin-top: 5vw;
+}
+
+.attendance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1vh;
+    padding-bottom: 0.8vh;
+    border-bottom: 0.1vh solid #eee;
+}
+
+.attendance-title {
+    font-size: 1.6vw;
+    font-weight: 300;
+    color: #333;
+    margin: 0;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3vw;
+    background-color: #ff7516;
+    color: white;
+    border: none;
+    border-radius: 0.4vw;
+    padding: 0.5vh 1vw;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9vw;
+    transition: background-color 0.2s;
+}
+
+.export-btn svg {
+    width: 1.2vw;
+    height: 1.2vw;
+}
+
+.export-btn:hover {
+    background-color: #e6650c;
+}
+
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    align-items: center;
+    margin-bottom: 0.8vw;
+    padding:  1vw;
+    background-color: #f8f8f8;
+    border-radius: 0.4vw;
+    min-width: 20vw; 
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 0.6vw;
+    flex-wrap: wrap; 
+    min-width: 15vw; 
+}
+
+.date-range label {
+    font-size: 0.9vw;
+    color: #555;
+}
+
+.date-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.date-input-container {
+    position: relative;
+}
+
+.date-input {
+    padding: 0.5vw 2.5vw 0.5vw 0.8vw;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.3vw;
+    font-size: 0.9vw;
+    width: 10vw;
+    min-width: 8vw; 
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 0.6vw;
+    top: 1.2vw;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+
+.calendar-icon svg {
+    width: 1vw;
+    height: 1vw;
+}
+
+.to-text {
+    font-size: 0.9vw;
+    color: #666;
+}
+
+.status-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.6vw;
+}
+
+.status-filter label {
+    font-size: 0.9vw;
+    color: #555;
+}
+
+.status-select {
+    padding: 0.5vh 0.8vw;
+    border: 0.1vh solid #ddd;
+    border-radius: 0.3vw;
+    font-size: 0.9vw;
+    width: 8vw;
+    min-width: 6vw; 
+}
+
+.apply-filters-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    background-color: #ff7516;
+    color: white;
+    border: none;
+    border-radius: 0.4vw;
+    padding: 0.5vh 1vw;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: auto;
+    font-size: 0.9vw;
+    transition: background-color 0.2s;
+}
+
+.apply-filters-btn svg {
+    width: 1vw;
+    height: 1vw;
+}
+
+.apply-filters-btn:hover {
+    background-color: #e6650c;
+}
+
+.attendance-table-container {
+    width: 95vw;
+    margin-bottom: 1vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.attendance-table {
+    width: 100vw;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+.attendance-table th {
+    background-color: #f8f8f8;
+    font-weight: 500;
+    color: #555;
+    text-align: left;
+    padding: 0.6vh 0.6vw;
+    border-bottom: 0.1vh solid #eee;
+    position: sticky;
+    top: 0;
+    font-size: 0.9vw;
+    white-space: nowrap;
+}
+
+.attendance-table td {
+    padding: 0.6vh 0.6vw;
+    border-bottom: 0.1vh solid #eee;
+    color: #333;
+    white-space: nowrap;
+    font-size: 0.9vw;
+}
+
+
+.attendance-table th,
+.attendance-table td {
+    width: calc(88vw / 7); 
+}
+
+.date-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-1{
+    font-weight: 400;
+}
+
+.day {
+    color: #888;
+    font-size: 0.8vw;
+}
+
+.method {
+    display: inline-block;
+    padding: 0.2vh 0.5vw;
+    border-radius: 0.8vw;
+    font-size: 0.8vw;
+    font-weight: 500;
+}
+
+.method.remote {
+    background-color: #f3e5f5;
+    color: #9c27b0;
+}
+
+.method.fingerprint {
+    background-color: #e0f7fa;
+    color: #00bcd4;
+}
+.fingerprint-icon {
+    color: #6f42c1; 
+    font-size: 1vw;
+    margin-right: 0.5vw; 
+    vertical-align: middle; 
+}
+
+.method.pending {
+    background-color: #f5f5f5;
+    color: #757575;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.2vh 0.5vw;
+    border-radius: 0.8vw;
+    font-size: 0.8vw;
+    font-weight: 500;
+}
+
+.status.on-time {
+    background-color: #e8f5e9;
+    color: #4caf50;
+}
+
+.status.late {
+    background-color: #fff8e1;
+    color: #ffc107;
+}
+
+.status.in-progress {
+    background-color: #e3f2fd;
+    color: #2196f3;
+    margin-left: -13vw;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.3vw;
+    margin-top: 1vh;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2vw;
+    height: 2.2vw;
+    border: 0.1vh solid #ddd;
+    border-radius: 0.3vw;
+    background-color: transparent;
+    cursor: pointer;
+    color: #666;
+    font-size: 0.8vw;
+    transition: all 0.2s;
+}
+
+.pagination-btn svg {
+    width: 0.9vw;
+    height: 0.9vw;
+}
+
+.pagination-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination-btn.active {
+    background-color: #ff7516;
+    color: white;
+    border-color: #ff7516;
+}
+
+/* Main container to prevent overflow */
+.main-container {
+    width: 100vw;
+    overflow: hidden;
+}
+
+.container {
+    width: 70vw;
+    margin: 0 auto;
+    min-width: 600px;  
+    max-width: 1200px; 
+  
+}
+
+.card {
+    background-color: white;
+    border-radius: 0.8vw;
+    box-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.05);
+    padding: 1vw;
+    width: 70vw;
+    overflow: hidden;
+    margin-top: 5vw;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5vw;
+}
+
+.title {
+    font-size: 2.2vw;
+    font-weight: bold;
+    color: #252a41;
+    margin-bottom: 2vw;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 0.8vw;
+    margin-bottom: 1.5vw;
+    margin-top: 6vw;
+    margin-left: 41vw;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    padding: 0.8vw 1.2vw;
+    border: 1px solid #e1e1e1;
+    border-radius: 0.5vw;
+    background-color: white;
+    font-size: 0.9vw;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #f9f9fb;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75vw;
+    margin-bottom: 1vw;
+    flex-wrap: nowrap; /* Prevents wrapping to a new line */
+    width: 68vw; 
+    margin-top: 1vw;
+}
+
+.search-bar {
+    width: 55vw; /* Adjusted width for responsiveness */
+    min-width: 250px; /* Prevents shrinking too much */
+    padding: 0.5vw;
+    border: 1px solid #e1e1e1;
+    border-radius: 0.1vw;
+    font-size: 1vw;
+    flex-shrink: 1; /* Allows resizing but prevents excessive shrinking */
+}
+
+.status-dropdown {
+    width: 12vw; /* Adjusted width to maintain alignment */
+    min-width: 100px; /* Ensures dropdown doesn't get too small */
+    padding: 0.6vw;
+    border: 1px solid #e1e1e1;
+    border-radius: 0.1vw;
+    font-size: 1vw;
+    cursor: pointer;
+    flex-shrink: 0; /* Prevents dropdown from shrinking */
+}
+
+
+
+.table {
+    width: 68vw;
+    border-collapse: collapse;
+  
+}
+
+.table-header {
+    background-color: #f8f8f8;
+    border: 1px solid #e1e1e1;
+    padding: 0.4vw;
+    text-align: center;
+    font-size: 1vw;
+    color: #555555;
+    font-weight: 500;
+}
+
+.table-cell {
+    border: 1px solid #e1e1e1;
+    padding: 0.3vw;
+    font-size: 1vw;
+    text-align: center;
+}
+.day-2{
+    font-weight: 5
+    00;
+    display: block;
+    color: #888;
+    font-size: 0.8vw;
+}
+.date-2 {
+    font-weight: 400;
+    display: block;
+}
+.check-in {
+    background-color: #e6f7f0;
+    color: #32a37b;
+    padding: 0.2vw 1vw;
+    border-radius: 2vw;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5vw;
+    font-size: 1.1vw;
+}
+
+.check-out {
+    background-color: #fde8e8;
+    color: #e53e3e;
+    padding: 0.4vw 1vw;
+    border-radius: 2vw;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5vw;
+    font-size: 1.1vw;
+}
+
+.break {
+    background-color: #e6eeff;
+    color: #3182ce;
+    padding: 0.4vw 1vw;
+    border-radius: 2vw;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5vw;
+    font-size: 1.1vw;
+}
+
+.green-line {
+    width: 0.3vw;
+    background-color: #32a37b;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.red-line {
+    width: 0.3vw;
+    background-color: #e53e3e;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.blue-line {
+    width: 0.3vw;
+    background-color: #3182ce;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.table-row {
+    position: relative;
+}
+
+.icon {
+    width: 1.2vw;
+    height: 1.2vw;
+    vertical-align: middle;
+    margin-right: 0.3vw;
+}
+
+/* Fix for the colored lines */
+.table-row {
+    position: relative;
+    border-left: 0.3vw solid transparent;
+}
+
+.table-row:nth-child(1),
+.table-row:nth-child(2),
+.table-row:nth-child(6) {
+    border-left-color: #32a37b;
+}
+
+.table-row:nth-child(3) {
+    border-left-color: #3182ce;
+}
+
+.table-row:nth-child(4),
+.table-row:nth-child(5) {
+    border-left-color: #e53e3e;
+}
+
+/* Remove the absolute positioned lines */
+.green-line, .red-line, .blue-line {
+    display: none;
+}

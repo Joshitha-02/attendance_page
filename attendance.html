@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
+    <title>Anika HRM</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
+    <link rel="stylesheet" href="attendance.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/26eea4c998.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">Attendance Management</div>
+        <div class="help-icon">      
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="#ff5400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:2.5vw;height: 2.5vw;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+  </div>
+    </div>
+    
+    <div class="sidebar">
+        <div class="logo-container">
+            <img class="logo-1-icon18" alt="" src="https://ik.imagekit.io/jxuol7kjt/logo-12@2x.png?updatedAt=1740831644868" />
+            <div class="logo-text">Anika <span>HRM</span></div>
+        </div>
+        
+        <div class="my-view">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+          </svg>
+            Hr View
+        </div>
+        <div class="my-view">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+          </svg>
+            Manager View
+        </div>
+        
+        <div class="menu-item" onclick="window.location.href='test_emp.php'">
+           <img src="https://hrms.anikasterilis.com/public/vector3.svg" alt="">
+            Dashboard
+        </div>
+        
+       
+        
+        <div class="menu-item" onclick="window.location.href='apply-leave-emp.php'">
+            <img src="https://hrms.anikasterilis.com/emp_public/vector2.svg" alt="">
+            Leaves
+        </div>
+        
+        
+        
+        <div class="menu-item " id="attendanceMenu" onclick="window.location.href='attendenceemp2.php'">
+            <img class="user" style="margin-left:1vw" src="https://hrms.anikasterilis.com/emp_public/vector4.svg" alt="">
+            Attendance
+           
+        </div>
+        <div class="menu-item" onclick="window.location.href='card.php'">
+            <img src="https://hrms.anikasterilis.com/emp_public/arcticonsgooglepay2.svg" alt="">
+            Directories
+        </div>
+        
+        <div class="menu-item" onclick="window.location.href='./module_transition_emp-policies/index.php?target=https://hrms.anikasterilis.com/emppolicy/emppolicy.php'">
+            <img src="https://hrms.anikasterilis.com/emp_public/streamlineinterfacecontentchartproductdataanalysisanalyticsgraphlinebusinessboardchart1.svg" alt="">
+            Policies
+        </div>
+
+      
+        
+        <div class="logout">
+          <img src="https://hrms.anikasterilis.com/emp_public/group2.svg" alt="">
+          <p>Logout</p>
+        </div>
+    </div>
+    <!--main content-->
+    <div class="main-content">
+        <div class="att-header">
+            
+            <button id="applyLeaveBtn" class="toggle-btn active" onclick="setActive(this, 'leaveFormContainer')">
+                Attendance
+            </button>
+            <button id="myLeavesBtn" class="toggle-btn " onclick="setActive(this, 'myLeavesContainer')">
+                Attendance Log
+            </button>
+            <button id="leaveHistoryBtn" class="toggle-btn" onclick="setActive(this, 'leaveHistoryContainer')">
+               Monthly Attendance
+            </button>
+
+         </div>
+
+
+        
+    <!-- Add a container div to maintain fixed size -->
+<div class="main-container">
+    <div id="leaveFormContainer" class="section active">
+        <div class="attendance-container">
+            <div class="attendance-header">
+                <h2 class="attendance-title">My Attendance</h2>
+                <button class="export-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Export
+                </button>
+            </div>
+            
+            <div class="filter-container">
+                <div class="date-range">
+                    <label>Date Range:</label>
+                    <div class="date-inputs">
+                        <div class="date-input-container">
+                            <input type="text" value="01-03-2025" class="date-input" />
+                            <span class="calendar-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </span>
+                        </div>
+                        <span class="to-text">to</span>
+                        <div class="date-input-container">
+                            <input type="text" value="22-03-2025" class="date-input" />
+                            <span class="calendar-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-filter">
+                    <label>Status:</label>
+                    <select class="status-select">
+                        <option>Absent</option>
+                        <option>Present</option>
+                        <option>Late</option>
+                        <option>On Time</option>
+                        <option>In Progress</option>
+                    </select>
+                </div>
+                
+                <button class="apply-filters-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                    </svg>
+                    Apply Filters
+                </button>
+            </div>
+            
+            <div class="attendance-table-container">
+                <table class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Check In</th>
+                            <th>Method</th>
+                            <th>Check Out</th>
+                            <th>Method</th>
+                            <!-- <th>Work Hours</th> -->
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="date-cell">
+                                <span class="date-1">22 Mar 2025</span>
+                                <span class="day">Saturday</span>
+                            </td>
+                            <td>09:22:19</td>
+                            <td><span class="method remote">Remote</span></td>
+                            <td>18:03:13</td>
+                            <td><span class="method pending">Pending</span></td>
+                            <td></td>
+                            <td><span class="status in-progress">In Progress</span></td>
+                        </tr>
+                        <tr>
+                            <td class="date-cell">
+                                <span class="date-1">21 Mar 2025</span>
+                                <span class="day">Friday</span>
+                            </td>
+                            <td>09:20:02</td>
+                            <td><span class="method remote">Remote</span></td>
+                            <td>18:03:13</td>
+                            <td><span class="method remote">Remote</span></td>
+                            <!-- <td>08:43</td> -->
+                            <td><span class="status on-time">On Time</span></td>
+                        </tr>
+                        <tr>
+                            <td class="date-cell">
+                                <span class="date-1">20 Mar 2025</span>
+                                <span class="day">Thursday</span>
+                            </td>
+                            <td>09:25:17</td>
+                            <td><span class="method remote">Remote</span></td>
+                            <td>18:04:18</td>
+                            <td><span class="method remote">Remote</span></td>
+                            <!-- <td>08:39</td> -->
+                            <td><span class="status on-time">On Time</span></td>
+                        </tr>
+                        <tr>
+                            <td class="date-cell">
+                                <span class="date-1">19 Mar 2025</span>
+                                <span class="day">Wednesday</span>
+                            </td>
+                            <td>09:36:42</td>
+                            <td><span class="method fingerprint">Fingerprint</span></td>
+                            <td>18:05:06</td>
+                            <td><span class="method fingerprint">Fingerprint</span></td>
+                            <!-- <td>08:29</td> -->
+                            <td><span class="status late">Late</span></td>
+                        </tr>
+                        <tr>
+                            <td class="date-cell">
+                                <span class="date-1">18 Mar 2025</span>
+                                <span class="day">Tuesday</span>
+                            </td>
+                            <td>09:40:23</td>
+                            <td><span class="method fingerprint">Fingerprint</span></td>
+                            <td>18:01:48</td>
+                            <td><span class="method fingerprint">Fingerprint</span></td>
+                            <!-- <td>08:21</td> -->
+                            <td><span class="status late">Late</span></td>
+                        </tr>
+                        <tr>
+                            <td class="date-cell">
+                                <span class="date-1">17 Mar 2025</span>
+                                <span class="day">Monday</span>
+                            </td>
+                            <td>09:45:55</td>
+                            <td><span class="method fingerprint">Fingerprint</span></td>
+                            <td>16:00:07</td>
+                            <td><span class="method fingerprint">Fingerprint</span></td>
+                            <!-- <td>06:15</td> -->
+                            <td><span class="status late">Late</span></td>
+                        </tr>
+                        <tr>
+                            <td class="date-cell">
+                                <span class="date-1">15 Mar 2025</span>
+                                <span class="day">Saturday</span>
+                            </td>
+                            <td>09:14:58</td>
+                            <td><span class="method remote">Remote</span></td>
+                            <td>18:22:23</td>
+                            <td><span class="method remote">Remote</span></td>
+                            <!-- <td>09:08</td> -->
+                            <td><span class="status on-time">On Time</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                <button class="pagination-btn prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn next">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add these div elements for the other two sections -->
+    <div id="myLeavesContainer" class="section">
+        <!-- Content for Attendance Log section -->
+        
+        <div class="card">
+            <h1 style="font-size: 1.6vw;font-weight: 300;">Attendance Log</h1>
+          
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search by date, time or method...">
+                <select class="status-dropdown">
+                    <option value="">Select Status</option>
+                    <option value="checkin">Check-in</option>
+                    <option value="checkout">Check-out</option>
+                    <option value="breakin">Break-in</option>
+                    <option value="breakout">Break-out</option>
+                </select>
+            </div>
+            
+           
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="table-header">
+                                Date
+                            </th>
+                            <th class="table-header">Input Type</th>
+                           
+                            
+                            <th class="table-header">
+                                Time
+                            </th>
+                            <th class="table-header">Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <div class="green-line"></div>
+                            
+                            <td class="table-cell">
+                                
+                                <span class="date-2">Mar 4 2025</span>
+                                
+                                <span class="day-2">Thursday</span>
+                                
+                            </td>
+                            <td class="table-cell">
+                                <span class="check-in">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" />
+                                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" />
+                                    </svg>
+                                    Check In
+                                </span>
+                            </td>
+                            
+                            <td class="table-cell">09 Hrs 37 mins</td>
+                            <td class="table-cell">Fingerprint</td>
+                        </tr>
+                        <tr class="table-row">
+                            <div class="green-line"></div>
+                           
+                            <td class="table-cell">
+                                <span class="date-2">Mar 4 2025</span>
+                                <span class="day-2">Thursday</span>
+                            </td>
+                            <td class="table-cell">
+                                <span class="check-in">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" />
+                                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" />
+                                    </svg>
+                                    Check In
+                                </span>
+                            </td>
+                            <td class="table-cell">09 Hrs 37 mins</td>
+                            <td class="table-cell">Face</td>
+                        </tr>
+                        <tr class="table-row">
+                            <div class="blue-line"></div>
+                            
+                            <td class="table-cell">
+                                <span class="date-2">Mar 3 2025</span>
+                                <span class="day-2">Wednesday</span>
+                            </td>
+                            <td class="table-cell">
+                                <span class="break">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="6" width="18" height="12" rx="2" />
+                                        <path d="M3 10H21" />
+                                    </svg>
+                                    Break in 
+                                </span>
+                            </td>
+                            <td class="table-cell">18 Hrs 05 mins</td>
+                            <td class="table-cell">Fingerprint</td>
+                        </tr>
+                        <tr class="table-row">
+                            <div class="red-line"></div>
+                            
+                            <td class="table-cell">
+                                <span class="date-2">Mar 3 2025</span>
+                                <span class="day-2">Wednesday</span>
+                            </td>
+                            <td class="table-cell">
+                                <span class="check-out">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" />
+                                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" />
+                                    </svg>
+                                    Check Out
+                                </span>
+                            </td>
+                            <td class="table-cell">18 Hrs 05 mins</td>
+                            <td class="table-cell">Face</td>
+                        </tr>
+                        <tr class="table-row">
+                            <div class="red-line"></div>
+                           
+                            <td class="table-cell">
+                                <span class="date-2">Mar 2 2025</span>
+                                <span class="day-2">Tuesday</span>
+                            </td>
+                            <td class="table-cell">
+                                <span class="check-out">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" />
+                                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" />
+                                    </svg>
+                                    Check Out
+                                </span>
+                            </td>
+                            <td class="table-cell">18 Hrs 02 mins</td>
+                            <td class="table-cell">Remote</td>
+                        </tr>
+                        <tr class="table-row">
+                            <div class="green-line"></div>
+                            
+                            <td class="table-cell">
+                                <span class="date-2">Mar 2 2025</span>
+                                <span class="day-2">Tuesday</span>
+                            </td>
+                            <td class="table-cell">
+                                <span class="check-in">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" />
+                                        <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" />
+                                    </svg>
+                                    Check In
+                                </span>
+                            </td>
+                            <td class="table-cell">09 Hrs 30 mins</td>
+                            <td class="table-cell">Fingerprint</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+       </div>
+        
+    <div id="leaveHistoryContainer" class="section">
+        <!-- Content for Monthly Attendance section -->
+        <h2>Monthly Attendance Content</h2>
+    </div>
+</div>
+</div> </div>
+</body>
+<script>
+    function setActive(button, containerId) {
+         // Hide all sections
+         document.querySelectorAll('.section').forEach(section => {
+             section.classList.remove('active');
+         });
+ 
+         // Show selected section
+         document.getElementById(containerId).classList.add('active');
+ 
+         // Remove 'active' class from all buttons
+         document.querySelectorAll('.toggle-btn').forEach(btn => {
+             btn.classList.remove('active');
+         });
+ 
+         // Add 'active' class to clicked button
+         button.classList.add('active');
+     }
+ 
+     window.onload = function () {
+         document.getElementById("attendanceMenu").classList.add("active");
+         setActive(document.getElementById('applyLeaveBtn'), 'leaveFormContainer');
+     };
+ 
+
+ 
+ 
+   </script>
+   </body>
+   </html>
+ 
